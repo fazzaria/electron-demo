@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+  <base href="/">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<title>mFOS Utility</title>
+</head>
+<body ng-controller="MainCtrl">
+	<div class="container">
+		<div id="infoModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" id="infoTitle"></h4>
+					</div>
+					<div class="modal-body" id="infoModalText">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h4 id="pageHeader">mFOS System Admin Utility</h4>
+				<hr />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-11">
+				<select class="form-control" 
+					ng-model="screen"
+					ng-change="changeScreen()" 
+					ng-options="screen.name for screen in screens"
+				>
+    		</select>
+			</div>
+			<div class="col-md-1">
+				<i data-toggle="modal" data-target="#infoModal" class="fa fa-2x fa-info-circle tabInfo" ng-click="changeInfo()" ng-if="screen.url != '/'" aria-hidden="true"></i>
+			</div>
+		</div>
+		<hr />
+	</div>
+	<div class="container">
+		<div ng-view onload="update()"></div>
+	</div>
+	<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-datepicker.min.js"></script>
+	<script src="js/bundle.js"></script>
+	<script src="js/scripts.js"></script>
+</body>
+</html>

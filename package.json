@@ -1,0 +1,21 @@
+{
+  "name": "adminscreen-outer",
+  "version": "1.0.0",
+  "description": "mFOS App Builder",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "install-app-deps",
+    "start": "electron ./app --enable-logging",
+    "dev": "NODE_ENV='development' npm run start",
+    "dist": "build --x64 --ia32"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron-builder": "^14.5.3",
+    "electron": "^1.6.1"
+  },
+  "build": {},
+  "dependencies": {
+  }
+}

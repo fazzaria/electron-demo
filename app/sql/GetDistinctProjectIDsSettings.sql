@@ -1,0 +1,3 @@
+SELECT DISTINCT ProjectID FROM MobileAppSetting
+WHERE ProjectID IS NOT NULL
+ORDER BY ProjectID

@@ -1,0 +1,2 @@
+SELECT DISTINCT ProjectID FROM AuthToken
+ORDER BY ProjectID

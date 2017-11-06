@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-sm-3">
+    <label class="control-label">Select Hub Database:</label>
+    <div class="form-group">
+      <select id="userDBSelect" ng-model="database" class="form-control">
+        <option ng-repeat="db in dbs" value="{{db.name}}">{{db.display}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <label class="control-label">WINSID:</label>
+    <input type="text" ng-model="username" class="form-control" />
+  </div>
+  <div class="col-sm-2">
+    <label class="control-label">Role:</label>
+    <div class="form-group">
+      <select ng-model="roleFilter" placeholder="" class="form-control">
+        <option value="">Any</option>
+        <option ng-repeat="role in roles" value={{role.RoleType}}>{{role.RoleType}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <label class="control-label">Project ID:</label>
+    <div class="form-group">
+      <select ng-model="projectID" placeholder="" ng-change="changeProject()" class="form-control">
+        <option value="">Any</option>
+        <option ng-repeat="project in projectIDs" value={{project}}>{{project}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <label class="control-label">Active:</label>
+    <div class="form-group">
+      <select ng-model="activeFilter" placeholder="" class="form-control">
+        <option value="">Either</option>
+        <option value="Y">Yes</option>
+        <option value="N">No</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" style="margin-top: 25px" ng-click=search()>Search</button>
+  </div>
+</div>
+<!-- <div class="row">
+  <div class="col-sm-1">
+    <button data-toggle="modal" data-target="#insertUser" class="btn btn-info" style="margin-top: 25px">Add User</button>
+  </div>
+</div> -->
+<div style="margin-top: 15px;">
+  <div class="pull-left">
+    <label class="control-label">{{feedback}}</label>
+    <br>
+    <ul class="pagination" style="margin: 0px;">
+      <li><a ng-click="changePage(-1)" role="button" href=""><span aria-label="Previous">«</span></a></li>
+      <li><input disabled style="width: 50px; float: left" class="form-control" ng-change="search()" ng-model="page" value=0/></li>
+      <li><a ng-click="changePage(1)" role="button" href=""><span aria-label="Next">»</span></a></li>
+    </ul>
+  </div>
+  <div class="pull-right">
+    <label class="control-label">Results Per Page:</label>
+    <br>
+    <form style="margin-top: 5px;">
+      <input checked=true ng-model="perPage" type="radio" value="10">&nbsp;10&nbsp;
+      <input ng-model="perPage" type="radio" value="15">&nbsp;15&nbsp;
+      <input ng-model="perPage" type="radio" value="20">&nbsp;20&nbsp;
+    </form>
+  </div>
+</div>
+<table class="table table-striped table-hover table-bordered results-table">
+  <thead>
+    <tr>
+      <th class="sort-table-header" ng-click="changeSort('BFOSRoleID')">BFOS Role ID</th>
+      <th class="sort-table-header" ng-click="changeSort('UserName')">WINSID</th> 
+      <th class="sort-table-header" ng-click="changeSort('RoleType')">Role Type</th>
+      <th class="sort-table-header" ng-click="changeSort('ProjectID')">Project ID</th>
+      <th class="sort-table-header" ng-click="changeSort('ActiveYN')">Active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in tblUsers">
+      <td>{{user.BFOSRoleID}}</td>
+      <td>{{user.UserName}}</td>
+      <td>{{user.RoleType}}</td>
+      <td>{{user.ProjectID}}</td>
+      <td>{{user.ActiveYN == "Y" ? "Yes" : "No"}}</td>
+    </tr>
+  </tbody>
+</table>

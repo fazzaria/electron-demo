@@ -1,0 +1,122 @@
+<div class="row">
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label class="control-label">WINSID:</label>
+      <input type="text" ng-model="winsid" class="form-control" />
+    </div>
+  </div>
+  <!-- <div class="col-sm-3">
+    <div class="form-group">
+      <label class="control-label">Hub Database:</label>
+      <select ng-model="db" ng-change="changeHub()" class="form-control">
+        <option value="demoHub">Demo</option>
+        <option value="productionHub">Production</option>
+      </select>
+    </div>
+  </div> -->
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label class="control-label">Project ID:</label>
+      <select id="projectSelect" ng-model="projectID" class="form-control">
+        <option ng-repeat="project in projectIDs" value={{project}}>{{project}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" style="margin-top: 25px" ng-click=search()>Search</button>
+  </div>
+</div>
+<div style="margin-top: 15px;">
+  <div class="pull-left">
+    <label class="control-label">BFOS Project User Info</label>
+  </div>
+  <div class="pull-right">
+    <label class="control-label">{{roleFeedback}}</label>
+    <br>
+  </div>
+</div>
+<table class="table table-striped table-hover table-bordered results-table">
+  <thead>
+    <tr>
+      <th>Role ID</th>
+      <th>Staff ID</th>
+      <th>Role</th>
+      <th>Login ID</th>
+      <th>Active</th>
+      <th>Date Created</th>
+      <th>Date Updated</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="role in tblRole">
+      <td>{{role.ROLEID}}</td>
+      <td>{{role.STAFFID}}</td>
+      <td>{{role.ROLETYPEID == 1 ? "Interviewer" : role.ROLETYPEID}}</td>
+      <td class="break">{{role.LOGINID}}</td>
+      <td>{{role.ACTIVEYN == "Y" ? "Yes" : "No"}}</td>
+      <td class="break">{{role.CREATEDT}}</td>
+      <td class="break">{{role.UPDATEDT}}</td>
+      <td><button ng-if="iProjectID.slice(-3) != 'PRD' && role.ACTIVEYN == 'N'" ng-click="addUser(role)" class="btn btn-primary center-block">Add to mFOS Hub</button></td>
+    </tr>
+  </tbody>
+</table>
+<div style="margin-top: 15px;">
+  <div class="pull-left">
+    <label class="control-label">mFOS Hub User Info</label>
+  </div>
+  <div class="pull-right">
+    <label class="control-label">{{feedback}}</label>
+    <br>
+  </div>
+</div>
+<table class="table table-striped table-hover table-bordered results-table">
+  <thead>
+    <tr>
+      <th>BFOS Role ID</th> 
+      <th>WINSID</th> 
+      <th>Project ID</th>
+      <th>Role Type</th>
+      <th>Active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in tblUsers">
+      <td>{{user.BFOSRoleID}}</td>
+      <td>{{user.UserName}}</td>
+      <td>{{user.ProjectID}}</td>
+      <td>{{user.RoleType}}</td>
+      <td>{{user.ActiveYN == "Y" ? "Yes" : "No"}}</td>
+    </tr>
+  </tbody>
+</table>
+<div style="margin-top: 15px;">
+  <div class="pull-left">
+    <label class="control-label">mFOS Hub Login Activity</label>
+  </div>
+  <div class="pull-right">
+    <label class="control-label">{{logFeedback}}</label>
+    <br>
+  </div>
+</div>
+<table class="table table-striped table-hover table-bordered results-table" id="log-table">
+  <thead>
+    <tr>
+      <th>Log Date</th>
+      <th>Message</th>
+      <th>Token</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="log in tblAppLog" ng-if="!log.Message.includes('Authorize Starts, username:') && !log.Message.includes('Authorize ends, username:')" ng-class="log.Message.includes('Authorize from sso failed, username:') ? 'danger' : 'success'">
+      <td>{{log.LogDate}}</td>
+      <td class="break" id="msg-{{log.Id}}">{{log.Message.includes("Authorize from sso failed, username:") ? "Bad FOS/AD Username or password" : "Successful login"}}</td>
+      <td class="break">
+        <div ng-if="log.Token">
+          <a style="cursor: pointer; width:15%" onclick="toggleToken($(this))"><i class="fa fa-plus" aria-hidden="true"></i></a>
+          <input onclick="selectText($(this))" class="tokenField" readonly value={{log.Token}} style="display:none">
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,20 @@
+th.sort-table-header {
+	cursor: pointer;
+}
+th.sort-table-header:hover {
+	background-color: lightgray;
+}
+.results-table td.break {
+	word-break: break-all;
+}
+
+.tabInfo {
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+.tokenField {
+	box-sizing: border-box;
+	margin-left: 10px;
+	width: 85%;
+}

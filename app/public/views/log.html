@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-sm-3">
+    <label class="control-label">Select Database:</label>
+    <div class="form-group">
+      <select ng-model="projectID" placeholder="" ng-change="changeProject()" class="form-control">
+        <option ng-repeat="project in projectIDs" value={{project}}>{{project}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <label class="control-label">Search Log Text:</label>
+    <input ng-model="searchText" class="form-control" type="text" placeholder="Enter Search Text">
+  </div>
+  <div class="col-sm-2">
+    <label class="control-label">In Field:</label>
+    <div class="form-group">
+      <select ng-model="messageOrException" class="form-control" id="formControlsSelect">
+        <option value="">Either</option>
+        <option value="Message">Message</option>
+        <option value="Exception">Exception</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <label class="control-label">From Logger:</label>
+    <div class="form-group">
+      <select class="form-control" id="formControlsSelect" ng-model="logger">
+        <option value="">Any</option>
+        <option ng-repeat="logger in loggers" value={{logger.Logger}}>{{logger.Logger}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="row" style="margin-bottom: 10px">
+  <div class="col-sm-4">
+    <label class="control-label">Search Between Dates:</label>
+    <div class="input-daterange input-group" id="datepicker">
+      <input type="text" ng-model="minLogDate" class="form-control" name="start" />
+      <span class="input-group-addon">to</span>
+      <input type="text" ng-model="maxLogDate" class="form-control" name="end" />
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <label class="control-label">Show:</label>
+    <br>
+    <form style="margin-top:5px">
+      <input ng-model="levelFilter" type="radio" value="INFO">&nbsp;Info&nbsp;
+      <input ng-model="levelFilter" type="radio" value="ERROR">&nbsp;Error&nbsp;
+      <input ng-model="levelFilter" type="radio" value="">&nbsp;Both&nbsp;
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <label class="control-label">Search By Log Id:</label>
+    <input ng-model="idSearch" class="form-control" type="number" min="1" placeholder="Enter Id">
+  </div>
+  <div class="col-sm-3">
+    <label class="control-label">With:</label>
+    <input ng-model="idRange" class="form-control" type="number" min="1" placeholder="Additional Records">
+  </div>
+  <div class="col-sm-3">
+    <label class="control-label">In Direction:</label>
+    <div class="form-group">
+      <select ng-model="idDirection" class="form-control">
+        <option value="">Either</option>
+        <option value="before">Before</option>
+        <option value="after">After</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" style="margin-top: 25px" ng-click=search()>Search</button>
+  </div>
+</div>
+<div class="pull-left">
+  <label class="control-label">{{feedback}}</label>
+  <br>
+  <ul class="pagination" style="margin: 0px;">
+    <li><a ng-click="changePage(-1)" role="button" href=""><span aria-label="Previous">«</span></a></li>
+    <li><input disabled style="width: 50px; float:left" class="form-control" ng-change="search()" ng-model="page" value=0/></li>
+    <li><a ng-click="changePage(1)" role="button" href=""><span aria-label="Next">»</span></a></li>
+  </ul>
+</div>
+<div class="pull-right">
+  <label class="control-label">Results Per Page:</label>
+  <form style="margin-top: 5px;">
+    <input checked ng-model="perPage" type="radio" value="25">&nbsp;25&nbsp;
+    <input ng-model="perPage" type="radio" value="50">&nbsp;50&nbsp;
+    <input ng-model="perPage" type="radio" value="100">&nbsp;100&nbsp;
+  </form>
+</div>
+<table class="table table-striped table-hover table-bordered results-table" id="log-table">
+  <thead>
+    <tr>
+      <th class="sort-table-header" ng-click="changeSort('Id')">Id</th>
+      <th class="sort-table-header" ng-click="changeSort('LogDate')">Log Date</th>
+      <th class="sort-table-header" ng-click="changeSort('Level')">Level</th>
+      <th class="sort-table-header" ng-click="changeSort('Logger')">Logger</th>
+      <th class="sort-table-header" ng-click="changeSort('Thread')">Thread</th>
+      <th class="sort-table-header" ng-click="changeSort('Message')">Message</th>
+      <th class="sort-table-header" ng-click="changeSort('Exception')">Exception</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="log in tblAppLog">
+      <td>{{log.Id}}</td>
+      <td>{{log.LogDate}}</td>
+      <td>{{log.Level}}</td>
+      <td class="break">{{log.Logger}}</td>
+      <td>{{log.Thread}}</td>
+      <td class="break" id="msg-{{log.Id}}">{{log.Message}}</td>
+      <td class="break">{{log.Exception}}</td>
+    </tr>
+  </tbody>
+</table>

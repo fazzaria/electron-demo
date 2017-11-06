@@ -1,0 +1,2 @@
+SELECT DISTINCT UserName FROM tblUsers
+ORDER BY UserName

@@ -1,0 +1,17 @@
+{
+	"configs": [
+		{
+			"name": "example",
+			"user": "username",
+			"password": "password",
+			"host": "DZSQL200.westat.com",
+			"database": "DevDB"
+		}
+	],
+	"userProjects": ["NHATS7TRN", "NHATS7PRD", "FOODAPSDEV", "FOODAPSTRN", "FOODAPSPRD", "ISASDEMO", "ISASTRN", "ISASPRD", "APECDEV", "APECPRD", "SEDDEV", "SEDPRD"],
+	"logProjects": ["NHATS7TRN", "NHATS7PRD", "FOODAPSDEV", "FOODAPSTRN", "FOODAPSPRD", "ISASDEMO", "ISASTRN", "ISASPRD", "APECDEV", "APECPRD", "SEDDEV", "SEDPRD"],
+	"tokenProjects": ["NHATS7TRN", "NHATS7PRD", "FOODAPSDEV", "FOODAPSTRN", "FOODAPSPRD", "ISASDEMO", "ISASTRN", "ISASPRD", "APECDEV", "APECPRD", "SEDDEV", "SEDPRD"],
+	"myDayProjects": ["NHATS7TRN", "NHATS7PRD", "FOODAPSDEV", "FOODAPSTRN", "FOODAPSPRD", "ISASDEMO", "ISASTRN", "ISASPRD", "APECDEV", "APECPRD", "SEDDEV", "SEDPRD"],
+	"erocs": ["NHATS7TRN", "NHATS7PRD", "FOODAPSDEV", "FOODAPSTRN", "FOODAPSPRD", "ISASDEMO", "ISASTRN", "ISASPRD", "APECDEV", "APECPRD"],
+	"metricsProjects": ["NHATS7TRN", "ISASPRD"]
+}

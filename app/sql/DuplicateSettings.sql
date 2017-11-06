@@ -1,0 +1,2 @@
+INSERT INTO MobileAppSetting (SettingType, SettingName, SettingValue, IsDisplayed, ProjectID)
+SELECT SettingType, SettingName, SettingValue, IsDisplayed, @newProject FROM MobileAppSetting WHERE ProjectID = @oldProject
